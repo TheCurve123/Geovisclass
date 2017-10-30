@@ -1,0 +1,148 @@
+<!--Notes from todays tutoring
+
+1. Line 25 - This is correct format to reference javascript for d3. The js file is in same directory. You need both d3 js files in same directory
+2. line 26-This is the correct format for your CSS style sheet to call it
+3. line 17 - I added <div> sections for each area and then gave each area a name in the div so you can change colors and formatting. See the Mystyles.css file changes I made.
+4. the graph script now works since the initial issue was your code was not calling the js script.
+5. Go ahead and update your data in the graph below.
+6. Look at the Mystyles.css sheet and see how I gave names to certain sections and then formatted them by using certain widths and colors.
+
+
+
+
+
+
+
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>The Little Engine...</title>
+		<script type="text/javascript" src="/js/d3.v3.js"></script>
+	
+<link rel="stylesheet" href="/css/Mystyles.css">  
+	</head>
+	<body>
+    <script type="text/javascript">
+        alert("It will get better going forward I promise.");
+    </script>
+	  <h1>Can we Explain Possable Geographic Range Overlap Between Physiologically Distinct Varietes of Paramormyrops Kingsleyae in the West Central-African Nation of Gabon </h1>
+    	<div class="importantlinks">    <a href="https://link-springer-com.ezproxy.lib.usf.edu/article/10.1007%2Fs00359-011-0643-8" target="_Blank" title="This Scientist Wonders">
+This Scientist Wonders About Non-Model Species</a></p>
+         <a href="http://msutoday.msu.edu/news/2017/15m-nsf-grant-to-explore-secrets-of-electric-fish-genome/" target="_Blank" title="This Scientist Wonders">
+He's Got a Team and Money</a></p>
+
+     <a href="https://scholar.google.com/citations?user=uoQHDRoAAAAJ&amp;hl=en" target="_Blank" title="This Scientist Wonders">
+12 Papers and Over 200 Citations. People are Watching This Team </a></p>
+        
+        </div>
+        
+<div class="left-half"><iframe width="434" height="217" src="https://www.youtube.com/embed/qWjus4t8RXc?ecver=1" frameborder="0" allowfullscreen=""></iframe>
+  </div>
+    
+    <div class="right-half">
+
+		<script type="text/javascript">
+		
+	        //set the width and height
+                var wt = 500;
+                var ht = 200;
+                var padding = 30;
+                var dataset = [
+                  [ 5,     95 ],
+                  [ 50,   90 ],
+                  [ 100,   50 ],
+                  [ 150,   33 ],
+                  [ 200,   22 ],
+                  [ 250,   12 ],
+                  [ 300,   44 ],
+                  [ 350,    67 ],
+                  [ 400,    77 ],
+                  [ 450,   88 ]
+              ];
+
+	      //Create scale functions
+	      var xScale = d3.scale.linear()
+                   .domain([0, d3.max(dataset, function(d) { return d[0]; })])
+		   .range([padding, wt- padding]);
+
+             var yScale = d3.scale.linear()
+                  .domain([0, d3.max(dataset, function(d) { return d[1]; })])
+                  .range([ht - padding, padding]);
+
+		//Define X axis
+	     var xAxis = d3.svg.axis()
+		  .scale(xScale)
+		  .orient("bottom")
+		  .ticks(5);
+
+			//Define Y axis
+	     var yAxis = d3.svg.axis()
+		   .scale(yScale)
+		   .orient("left")
+		   .ticks(5);
+                //create svg element
+                var svg = d3.select("body")
+                          .append("svg")
+                          .attr("width", wt)
+                          .attr("height", ht);
+
+                svg.selectAll("circle")
+                        .data(dataset)
+                        .enter()
+                        .append("circle")
+                        .attr("cx", function(d) {
+                           return xScale(d[0]);
+                         })
+                        .attr("cy", function(d) {
+                           return yScale(d[1]);
+                          })
+                        .attr("r", 5);
+
+             //Create labels
+			svg.selectAll("text")
+			   .data(dataset)
+			   .enter()
+			   .append("text")
+			   .text(function(d) {
+			   		return d[0] + "," + d[1];
+			   })
+			   .attr("x", function(d) {
+			   		return xScale(d[0]);
+			   })
+			   .attr("y", function(d) {
+			   		return yScale(d[1]);
+			   })
+			   .attr("font-family", "sans-serif")
+			   .attr("font-size", "11px")
+			   .attr("fill", "red");
+
+		  	
+			//Create X axis
+			svg.append("g")
+				.attr("class", "axis")
+				.attr("transform", "translate(0," + (ht - padding) + ")")
+				.call(xAxis);
+			
+			//Create Y axis
+			svg.append("g")
+				.attr("class", "axis")
+				.attr("transform", "translate(" + padding + ",0)")
+				.call(yAxis);
+
+                      svg.append("text")
+                            .attr("y", 50)
+                            .attr("x", 200)
+                            .attr("transform", "rotate(0)")
+                            .attr("dy", "1em")
+                            .style("text-anchor", "middle")
+                            .text("Value");
+			
+		</script>
+</div>
+	</body>
+</html>
