@@ -27,9 +27,7 @@
 <link rel="stylesheet" href="/css/Mystyles.css">  
 	</head>
 	<body>
-    <script type="text/javascript">
-        alert("It will get better going forward I promise.");
-    </script>
+   
 	  <h1>Can we Explain Possable Geographic Range Overlap Between Physiologically Distinct Varietes of Paramormyrops Kingsleyae in the West Central-African Nation of Gabon </h1>
     	<div class="importantlinks">    <a href="https://link-springer-com.ezproxy.lib.usf.edu/article/10.1007%2Fs00359-011-0643-8" target="_Blank" title="This Scientist Wonders">
 This Scientist Wonders About Non-Model Species</a></p>
@@ -53,7 +51,7 @@ He's Got a Team and Money</a></p>
                 var ht = 200;
                 var padding = 30;
                 var dataset = [
-                   [2011,	2 ],
+                   [2011,	2],
 				  [2012,	3],
 				  [2013,	5],
 				  [2014,	22],
@@ -64,7 +62,7 @@ He's Got a Team and Money</a></p>
 
 	      //Create scale functions
 	      var xScale = d3.scale.linear()
-                   .domain([0, d3.max(dataset, function(d) { return d[0]; })])
+                   .domain([2010, d3.max(dataset, function(d) { return d[0]; })])
 		   .range([padding, wt- padding]);
 
              var yScale = d3.scale.linear()
@@ -75,13 +73,14 @@ He's Got a Team and Money</a></p>
 	     var xAxis = d3.svg.axis()
 		  .scale(xScale)
 		  .orient("bottom")
-		  .ticks(5);
+		  .ticks(9)
+		   .tickFormat(d3.format("d"));
 
 			//Define Y axis
 	     var yAxis = d3.svg.axis()
 		   .scale(yScale)
 		   .orient("left")
-		   .ticks(5);
+		   .ticks(10);
                 //create svg element
                 var svg = d3.select("body")
                           .append("svg")
@@ -132,8 +131,8 @@ He's Got a Team and Money</a></p>
 				.call(yAxis);
 
                       svg.append("text")
-                            .attr("y", 50)
-                            .attr("x", 200)
+                            .attr("y", 60)
+                            .attr("x", 2000)
                             .attr("transform", "rotate(0)")
                             .attr("dy", "1em")
                             .style("text-anchor", "middle")
